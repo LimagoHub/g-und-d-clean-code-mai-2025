@@ -4,23 +4,23 @@ public class NimGameImpl: IGame
 {
 
     private int _stones;
-    private bool _gameOver;
+    private int _turn;
 
     public NimGameImpl()
     {
         _stones = 23;
-        _gameOver = false;
+    
     }
 
     public void Play()
     {
-        while (!_gameOver)
+        while (!IsGameOver())
         {
             PlayRound();
         }
     }
 
-    private void PlayRound()
+    private void PlayRound()  // Integration
     {
         HumanTurn();
         ComputerTurn();
@@ -29,38 +29,54 @@ public class NimGameImpl: IGame
 
     private void HumanTurn()
     {
-        int turn;
+        if (IsGameOver()) return;
+        
+        
         while (true)
         {
             Console.WriteLine($"Es gibt {_stones} Steine. Bitte nehmen Sie 1, 2 oder 3!");
             var input = Console.ReadLine();
-            turn = int.Parse(input);
-            if (turn >= 1 && turn <= 3) break;
+            _turn = int.Parse(input);
+            if (_turn >= 1 && _turn <= 3) break;
             Console.WriteLine("Ungueltiger Zug!");
         }
 
-        _stones -= turn;
+        TerminateTurn( "Spieler");
     }
     private void ComputerTurn()
     {
+        if (IsGameOver()) return;
         int[] zuege ={3,1,1,2};
-        int turn;
+     
+        _turn = zuege[_stones % 4];
+        Console.WriteLine($"Computer nimmt {_turn} Steine.");
+        
+        TerminateTurn("Computer");
+    }
 
-        if (_stones < 1)
+    private void TerminateTurn( string player) // Integration
+    {
+        UpdateBoard();
+        PrintGameoverMessageIfGameIsOver(player);
+    }
+
+    private void PrintGameoverMessageIfGameIsOver(string player)
+    {
+        if (IsGameOver())
         {
-            _gameOver = true;
-            Console.WriteLine("Du Loser!");
-            return;
+            Console.WriteLine($"{player} hat verloren");
         }
-        if (_stones == 1)
-        {
-            _gameOver = true;
-            _stones = 0;
-            Console.WriteLine("Du hast nur Glueck gehabt!");
-            return;
-        }
-        turn = zuege[_stones % 4];
-        Console.WriteLine($"Computer nimmt {turn} Steine.");
-        _stones -= turn;
+    }
+
+
+    // ---------------------- Implementierungssumpf
+    private void UpdateBoard()
+    {
+        _stones -= _turn;
+    }
+
+    private bool IsGameOver() // Operation
+    {
+        return _stones < 1;
     }
 }
