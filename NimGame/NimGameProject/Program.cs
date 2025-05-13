@@ -3,8 +3,11 @@
 using gi_de.client;
 using gi_de.game;
 using gi_de.game.nimgame;
+using NimGame.gi_de.game.nimgame;
 
-IGame game = new NimGameImpl();
+NimGameImpl game = new NimGameImpl();
+game.AddPlayer(new HumanPlayer("Fritz"));
+game.AddPlayer(new ComputerPlayer("HAL"));
 GameClient client = new GameClient(game);
 
 client.go();
