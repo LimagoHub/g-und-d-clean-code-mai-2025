@@ -6,15 +6,10 @@ public abstract class AbstractGame<BOARD,TURN> : IGame
 {
     
     private readonly IList<IPlayer<BOARD,TURN>> _players = new List<IPlayer<BOARD, TURN>>();
-    private IPlayer<BOARD,TURN> _currentPlayer;
-    
+
     private TURN _turn;
-    private BOARD _board;
-    protected IPlayer<BOARD,TURN> CurrentPlayer
-    {
-        get => _currentPlayer;
-        private set => _currentPlayer = value;
-    }
+
+    protected IPlayer<BOARD,TURN> CurrentPlayer { get; private set; }
 
     protected IList<IPlayer<BOARD,TURN>> Players => _players;
 
@@ -24,19 +19,17 @@ public abstract class AbstractGame<BOARD,TURN> : IGame
         set => _turn = value;
     }
 
-    protected BOARD Board
-    {
-        get => _board;
-        set => _board = value;
-    }
+    protected BOARD Board { get; set; }
 
     public void AddPlayer(IPlayer<BOARD,TURN> player)
     {
+        
         Players.Add(player);
     }
     
     public void RemovePlayer(IPlayer<BOARD,TURN> player)
     {
+        
         Players.Remove(player);
     }
     public void Play()

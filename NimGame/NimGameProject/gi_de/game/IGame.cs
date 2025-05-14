@@ -2,5 +2,9 @@
 
 public interface IGame
 {
+    
+    /// <summary>
+    /// 
+    /// </summary>
     void Play();
 }

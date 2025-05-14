@@ -11,6 +11,10 @@ public class GameClient
         _game = game;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+  
     public void go()
     {
         _game.Play();
