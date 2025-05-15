@@ -4,7 +4,7 @@ public class GenericGenerator: IGenerator<int>
 {
     private int _value;
     private readonly Func<int, int> _func;
-    public GenericGenerator(int seed, Func<int, int> fkt)
+    public GenericGenerator(in int seed, in Func<int, int> fkt)
     {
         this._value = seed;
         this._func = fkt;

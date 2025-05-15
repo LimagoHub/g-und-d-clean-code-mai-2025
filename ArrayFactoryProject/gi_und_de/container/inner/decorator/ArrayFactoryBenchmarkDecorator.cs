@@ -8,13 +8,13 @@ public class ArrayFactoryBenchmarkDecorator<T>: IArrayFactory<T>
     private IArrayFactory<T> ArrayFactory { get; }
     private IStopwatch Stopwatch { get; }
 
-    public ArrayFactoryBenchmarkDecorator(IArrayFactory<T> arrayFactory, IStopwatch stopwatch)
+    public ArrayFactoryBenchmarkDecorator(in IArrayFactory<T> arrayFactory, in IStopwatch stopwatch)
     {
         ArrayFactory = arrayFactory;
         Stopwatch = stopwatch;
     }
 
-    public T[] CreateAndFillArray(int size)
+    public new T[] CreateAndFillArray(in int size)
     {
         Stopwatch.Start();
         var result =  ArrayFactory.CreateAndFillArray(size);
@@ -23,4 +23,6 @@ public class ArrayFactoryBenchmarkDecorator<T>: IArrayFactory<T>
         Console.WriteLine($"Duration = {duration} ms");
         return result;
     }
+
+
 }

@@ -2,5 +2,5 @@
 
 public interface IArrayFactory<T>
 {
-    T[] CreateAndFillArray(int size);
+    T[] CreateAndFillArray(in int size);
 }

@@ -7,13 +7,14 @@ public class ArrayFactorySecure<T>:IArrayFactory<T>
        
     }
 
-    public ArrayFactorySecure(IArrayFactory<T> arrayFactory)
+    public ArrayFactorySecure(in IArrayFactory<T> arrayFactory)
     {
         ArrayFactory = arrayFactory;
     }
 
-    public T[] CreateAndFillArray(int size)
+    public T[] CreateAndFillArray(in int size)
     {
+        
         Console.WriteLine("Du kommst hier rein");
         return ArrayFactory.CreateAndFillArray(size);
     }

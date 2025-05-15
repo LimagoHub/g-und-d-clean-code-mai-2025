@@ -9,12 +9,12 @@ public class ArrayFactoryLogger<T>: IArrayFactory<T>
        
     }
 
-    public ArrayFactoryLogger(IArrayFactory<T> arrayFactory)
+    public ArrayFactoryLogger(in IArrayFactory<T> arrayFactory)
     {
         ArrayFactory = arrayFactory;
     }
 
-    public T[] CreateAndFillArray(int size)
+    public T[] CreateAndFillArray(in int size)
     {
         Console.WriteLine("Creating array");
         return ArrayFactory.CreateAndFillArray(size);
